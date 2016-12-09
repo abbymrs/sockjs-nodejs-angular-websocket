@@ -5,10 +5,19 @@ angular.module('myApp', [
         let value = null;
         $interval(() => {
 
-            sockService.then(res=>{
-                res = res.splice(0,1);
+            sockService.then(res => {
+                res = res.splice(0, 1).join(',').split(',');
                 console.log(res);
-                document.querySelector('.text').innerHTML = res[0];
+
+                if (res.length == 10) {
+                    let dom = document.querySelector('.text');
+                    let str = '';
+                    for (let i = 0; i < res.length; i++) {
+                        str += "<div>" + res[i] + "</div>";
+                    }
+                    dom.innerHTML = str;
+                }
+
             })
         }, 1000);
     })

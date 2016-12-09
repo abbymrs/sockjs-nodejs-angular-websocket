@@ -9,7 +9,7 @@ angular.module('service.sock', [
         var ws = $websocket(wsUrl);
         ws.onMessage(function (message) {
             result.push(message.data);
-            console.log(result);
+            // console.log(result);
         deferred.resolve(result);
         });
         ws.onOpen(() => {

@@ -15,6 +15,7 @@ app.all('*',(req,res,next)=>{
 });
 
 let num = 0;
+let result = [1,2,3,4,5,6,7,8,9,10];
 let sock = sockjs.createServer();
 sock.on('connection',conn=>{
     conn.on('data',msg=>{
@@ -28,8 +29,8 @@ sock.on('connection',conn=>{
         console.log(e);
     });
     setInterval(()=>{
-        num++;
-        conn.write(num);
+        console.log(randomData(result));
+        conn.write(randomData(result));
     },1000);
 });
 
@@ -43,13 +44,10 @@ app.get('/',(req,res)=>{
     res.sendFile(__dirname + '/src/views/index.html');
 });
 
-
-
-
-
-
-
-
-
-
+function randomData(data){
+    for(let i=0;i<data.length;i++){
+        data[i] = Math.floor(Math.random()*10);
+    }
+    return data;
+}
 
